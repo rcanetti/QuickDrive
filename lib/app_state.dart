@@ -49,7 +49,7 @@ class FFAppState extends ChangeNotifier {
     _fileNames.insert(index, value);
   }
 
-  String _ServerIP = '127.0.0.1';
+  String _ServerIP = '10.0.0.237';
   String get ServerIP => _ServerIP;
   set ServerIP(String value) {
     _ServerIP = value;

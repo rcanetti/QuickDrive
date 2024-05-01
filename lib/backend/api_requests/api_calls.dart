@@ -64,7 +64,7 @@ class UploadCall {
     String? key = '',
   }) async {
     final ffApiRequestBody = '''
-{"body": "$body", "key": "$key"}''';
+{"data": "$body", "key": "$key"}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Upload',
       apiUrl: 'http://$serverIP:8900/Upload/$username',
@@ -93,7 +93,7 @@ class RemoveCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "body": "$body",
+  "data": "$body",
   "key": "$key"
 }''';
     return ApiManager.instance.makeApiCall(
@@ -123,7 +123,7 @@ class DownloadCall {
     String? key = '',
   }) async {
     final ffApiRequestBody = '''
-{"body": "$body", "key":"$key" }''';
+{"data": "$body", "key":"$key" }''';
     return ApiManager.instance.makeApiCall(
       callName: 'Download',
       apiUrl: 'http://$serverIP:8900/Download/$username',
@@ -152,7 +152,7 @@ class RenameCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "body": "$body",
+  "data": "$body",
   "key": "$key"
 }''';
     return ApiManager.instance.makeApiCall(

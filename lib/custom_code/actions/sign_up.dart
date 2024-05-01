@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:quick_drive/custom_code/actions/formatMsg.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -23,7 +22,7 @@ Future<String> signUp(
     password as String
   ];
   String strData = await formatMsg("signup", data);
-  Socket tempSocket = await Socket.connect("192.168.1.226", 8900);
+  Socket tempSocket = await Socket.connect("10.0.0.237", 8900);
   tempSocket.write(strData);
 
   // Receive data from the server

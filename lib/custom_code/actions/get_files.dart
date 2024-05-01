@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 Future<List<String>> getFiles(dynamic response) async {
   // Add your function code here!
-  Map<String, dynamic> jsonMap = jsonDecode(response.body);
+  Map<String, dynamic> jsonMap = jsonDecode(response.data);
   String type = jsonMap['type'];
   String payload = jsonMap['payload'];
   List<String> files = [];
