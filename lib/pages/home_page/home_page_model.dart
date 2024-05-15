@@ -8,9 +8,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - uploadFile] action in FloatingActionButton widget.
-  String? uploadData;
-  // Stores action output result for [Backend Call - API (Upload)] action in FloatingActionButton widget.
-  ApiCallResponse? uploadResponse;
+  List<String>? uploadData;
   // Stores action output result for [Backend Call - API (getFiles)] action in FloatingActionButton widget.
   ApiCallResponse? newUploadJSON;
   // Stores action output result for [Custom Action - getFiles] action in FloatingActionButton widget.

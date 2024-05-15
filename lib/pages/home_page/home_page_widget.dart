@@ -49,27 +49,35 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            var shouldSetState = false;
             _model.uploadData = await actions.uploadFile();
-            _model.uploadResponse = await UploadCall.call(
-              serverIP: FFAppState().ServerIP,
-              username: FFAppState().username,
-              body: _model.uploadData,
-              key: FFAppState().key,
+            shouldSetState = true;
+            if (_model.uploadData?.first == 'No file picked') {
+              if (shouldSetState) setState(() {});
+              return;
+            }
+            await actions.submitFile(
+              FFAppState().fileNames[1],
+              FFAppState().fileNames[0],
+              FFAppState().fileNames[2],
+              FFAppState().fileNames[3],
+              FFAppState().username,
             );
             _model.newUploadJSON = await GetFilesCall.call(
               serverIP: FFAppState().ServerIP,
               username: FFAppState().username,
               key: FFAppState().key,
             );
+            shouldSetState = true;
             _model.newUploadedFiles = await actions.getFiles(
               (_model.newUploadJSON?.jsonBody ?? ''),
             );
+            shouldSetState = true;
             setState(() {
               FFAppState().fileNames =
                   _model.newUploadedFiles!.toList().cast<String>();
             });
-
-            setState(() {});
+            if (shouldSetState) setState(() {});
           },
           backgroundColor: FlutterFlowTheme.of(context).primary,
           elevation: 8.0,

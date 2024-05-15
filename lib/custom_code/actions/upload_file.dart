@@ -9,11 +9,19 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 
-Future<String> uploadFile() async {
+Future<List<String>> uploadFile() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles();
   if (result != null) {
     File file = File(result.files.single.path!);
-    return await formatMsg("upload", file);
+
+    String filename = result.files.single.name;
+    String filePath = result.files.single.path!;
+    String fileType = 'application'; // Replace with actual file type if known
+    String fileFormat = filePath
+        .split('.')
+        .last; // Extract the file format from the file extension
+
+    return [filename, filePath, fileType, fileFormat];
   }
-  return await formatMsg("upload", "failed to pick file");
+  return ['No file picked']; //no file picked
 }

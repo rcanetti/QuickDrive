@@ -22,7 +22,7 @@ Future<String> signUp(
     password as String
   ];
   String strData = await formatMsg("signup", data);
-  Socket tempSocket = await Socket.connect("10.0.0.237", 8900);
+  Socket tempSocket = await Socket.connect("10.0.0.237", 8800);
   tempSocket.write(strData);
 
   // Receive data from the server

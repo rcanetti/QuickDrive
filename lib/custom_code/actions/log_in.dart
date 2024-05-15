@@ -15,7 +15,7 @@ Future<String> logIn(
 ) async {
   List<String> data = [username as String, password as String];
   String strData = await formatMsg("login", data);
-  Socket tempSocket = await Socket.connect("10.0.0.237", 8900);
+  Socket tempSocket = await Socket.connect("10.0.0.237", 8800);
   print("connected to regular socket");
   tempSocket.write(strData);
   List<int> serverData = await tempSocket.first;

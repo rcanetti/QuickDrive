@@ -7,3 +7,4 @@ export 'delete_file.dart' show deleteFile;
 export 'download_file.dart' show downloadFile;
 export 'get_files.dart' show getFiles;
 export 'format_msg.dart' show formatMsg;
+export 'submit_file.dart' show submitFile;
