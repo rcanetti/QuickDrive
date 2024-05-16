@@ -29,12 +29,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const LogInWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Image.asset(
+                  'assets/images/clideo_editor_fc8b35452526416c8045d0d960b53111-ezgif.com-video-to-gif-converter.gif',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          : const LogInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const LogInWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Image.asset(
+                      'assets/images/clideo_editor_fc8b35452526416c8045d0d960b53111-ezgif.com-video-to-gif-converter.gif',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : const LogInWidget(),
         ),
         FFRoute(
           name: 'HomePage',
