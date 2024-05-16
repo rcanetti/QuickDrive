@@ -57,10 +57,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               return;
             }
             await actions.submitFile(
-              FFAppState().fileNames[1],
-              FFAppState().fileNames[0],
-              FFAppState().fileNames[2],
-              FFAppState().fileNames[3],
+              _model.uploadData![1],
+              _model.uploadData![0],
+              _model.uploadData![2],
+              _model.uploadData![3],
               FFAppState().username,
             );
             _model.newUploadJSON = await GetFilesCall.call(
