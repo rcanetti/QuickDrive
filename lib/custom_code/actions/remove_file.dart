@@ -6,8 +6,14 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<String> removeFile(String? fileName) async {
+Future<List<String>> removeFile(String? fileName) async {
   // Add your function code here!
-  String msg = await formatMsg('remove', fileName);
-  return msg;
+
+  int len = fileName!.length;
+  String strLen = len.toString();
+  while (strLen.length < 6) {
+    strLen = "0" + strLen;
+  }
+
+  return [strLen, fileName];
 }

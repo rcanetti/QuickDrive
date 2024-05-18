@@ -91,10 +91,12 @@ class RemoveCall {
     String? body = '',
     String? username = '',
     String? key = '',
+    String? len = '',
   }) async {
     final ffApiRequestBody = '''
 {
   "data": "$body",
+  "len": "$len",
   "key": "$key"
 }''';
     return ApiManager.instance.makeApiCall(

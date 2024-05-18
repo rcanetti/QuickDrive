@@ -243,7 +243,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           serverIP: FFAppState().ServerIP,
                                           username: FFAppState().username,
                                           key: FFAppState().key,
-                                          body: _model.removeMsg,
+                                          body: _model.removeMsg?[1],
+                                          len: _model.removeMsg?[0],
                                         );
                                         _model.fileListMsg =
                                             await GetFilesCall.call(

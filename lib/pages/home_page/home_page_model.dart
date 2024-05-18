@@ -14,7 +14,7 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   // Stores action output result for [Custom Action - getFiles] action in FloatingActionButton widget.
   List<String>? newUploadedFiles;
   // Stores action output result for [Custom Action - removeFile] action in Text widget.
-  String? removeMsg;
+  List<String>? removeMsg;
   // Stores action output result for [Backend Call - API (Remove)] action in Text widget.
   ApiCallResponse? removeResponse;
   // Stores action output result for [Backend Call - API (getFiles)] action in Text widget.
