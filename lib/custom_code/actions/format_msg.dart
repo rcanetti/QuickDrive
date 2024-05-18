@@ -96,7 +96,7 @@ Future<String> formatMsg(String request, dynamic payload) async {
   final message = {'type': request, 'payload': format};
 
   // Convert the map to a JSON string
-  final jsonString = jsonEncode(message);
+  String jsonString = jsonEncode(message);
 
   return jsonString;
 }
