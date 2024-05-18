@@ -8,5 +8,6 @@ import 'package:flutter/material.dart';
 
 Future<String> removeFile(String? fileName) async {
   // Add your function code here!
-  return await formatMsg('remove', fileName);
+  String msg = await formatMsg('remove', fileName);
+  return msg;
 }
