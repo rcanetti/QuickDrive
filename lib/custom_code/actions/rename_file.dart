@@ -11,5 +11,5 @@ Future<String?> renameFile(
   String? newFileName,
 ) async {
   // Add your function code here!
-  return formatMsg('rename', [oldFileName, newFileName]);
+  return await formatMsg('rename', [oldFileName, newFileName]);
 }

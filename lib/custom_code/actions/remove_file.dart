@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:quick_drive/custom_code/actions/format_msg.dart';
-
 Future<String> removeFile(String? fileName) async {
   // Add your function code here!
-  return formatMsg('remove', fileName);
+  return await formatMsg('remove', fileName);
 }
