@@ -11,7 +11,7 @@ class RenameFileModel extends FlutterFlowModel<RenameFileWidget> {
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Custom Action - renameFile] action in Button widget.
-  String? renameMsg;
+  List<String>? renameMsg;
   // Stores action output result for [Backend Call - API (Rename)] action in Button widget.
   ApiCallResponse? renameResponse;
   // Stores action output result for [Backend Call - API (getFiles)] action in Button widget.

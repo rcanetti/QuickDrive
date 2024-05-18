@@ -6,11 +6,17 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<String?> renameFile(
+Future<List<String>> renameFile(
   String? oldFileName,
   String? newFileName,
 ) async {
   // Add your function code here!
-  String msg = await formatMsg('rename', [oldFileName, newFileName]);
-  return msg;
+  String joinedString = oldFileName! + "|" + newFileName!;
+
+  int len = joinedString.length;
+  String strLen = len.toString();
+  while (strLen.length < 6) {
+    strLen = "0" + strLen;
+  }
+  return [strLen, joinedString];
 }

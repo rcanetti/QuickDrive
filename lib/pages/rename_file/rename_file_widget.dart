@@ -135,7 +135,8 @@ class _RenameFileWidgetState extends State<RenameFileWidget> {
                         serverIP: FFAppState().ServerIP,
                         username: FFAppState().username,
                         key: FFAppState().key,
-                        body: _model.renameMsg,
+                        body: _model.renameMsg?[1],
+                        len: _model.renameMsg?[0],
                       );
                       _model.fileListMsg = await GetFilesCall.call(
                         serverIP: FFAppState().ServerIP,
