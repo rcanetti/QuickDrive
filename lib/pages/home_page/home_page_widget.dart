@@ -235,7 +235,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         _model.removeMsg =
-                                            await actions.deleteFile(
+                                            await actions.removeFile(
                                           filesItem,
                                         );
                                         _model.removeResponse =

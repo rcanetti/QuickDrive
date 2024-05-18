@@ -82,7 +82,7 @@ Future<String> formatMsg(String request, dynamic payload) async {
     return jsonString;
   }
 
-  if (payload is List<String>) {
+  if (payload is List<String?>) {
     payload = payload.join('|');
   }
   int len = payload.length;

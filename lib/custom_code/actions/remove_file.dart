@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'package:quick_drive/custom_code/actions/format_msg.dart';
 
-Future<String> deleteFile(String? fileName) async {
+Future<String> removeFile(String? fileName) async {
   // Add your function code here!
-  return formatMsg('delete', fileName);
+  return formatMsg('remove', fileName);
 }
