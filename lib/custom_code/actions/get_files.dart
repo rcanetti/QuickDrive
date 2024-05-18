@@ -17,7 +17,7 @@ Future<List<String>> getFiles(dynamic response) async {
 
   try {
     files = payload.split("|");
-    files = files.sublist(1, files.length - 1);
+    // files = files.sublist(1, files.length - 1);
   } catch (e) {
     files = [payload];
   }

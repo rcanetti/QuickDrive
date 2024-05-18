@@ -12,6 +12,7 @@ class GetDownloadCall {
     String? serverIP = '',
     String? username = '',
     String? key = '',
+    String? fileName = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getDownload',
@@ -22,6 +23,7 @@ class GetDownloadCall {
       },
       params: {
         'key': key,
+        'data': fileName,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -124,9 +126,14 @@ class DownloadCall {
     String? body = '',
     String? username = '',
     String? key = '',
+    String? len = '',
   }) async {
     final ffApiRequestBody = '''
-{"data": "$body", "key":"$key" }''';
+{
+  "data": "$body",
+  "len": "$len",
+  "key": "$key"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'Download',
       apiUrl: 'http://$serverIP:8900/Download/$username',
