@@ -234,13 +234,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        _model.newFileList =
+                                        _model.removeMsg =
                                             await actions.deleteFile(
                                           filesItem,
                                         );
-                                        setState(() {
+                                        _model.removeResponse =
+                                            await RemoveCall.call(
+                                          serverIP: FFAppState().ServerIP,
+                                          username: FFAppState().username,
+                                          key: FFAppState().key,
+                                          body: _model.removeMsg,
+                                        );
+                                        _model.fileListMsg =
+                                            await GetFilesCall.call(
+                                          serverIP: FFAppState().ServerIP,
+                                          username: FFAppState().username,
+                                          key: FFAppState().key,
+                                        );
+                                        _model.fileList =
+                                            await actions.getFiles(
+                                          (_model.fileListMsg?.jsonBody ?? ''),
+                                        );
+                                        FFAppState().update(() {
                                           FFAppState().fileNames = _model
-                                              .newFileList!
+                                              .fileList!
                                               .toList()
                                               .cast<String>();
                                         });

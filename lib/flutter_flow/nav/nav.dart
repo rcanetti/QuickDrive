@@ -35,7 +35,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 color: Colors.transparent,
                 child: Image.asset(
                   'assets/images/clideo_editor_fc8b35452526416c8045d0d960b53111-ezgif.com-video-to-gif-converter.gif',
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             )
@@ -50,7 +50,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     color: Colors.transparent,
                     child: Image.asset(
                       'assets/images/clideo_editor_fc8b35452526416c8045d0d960b53111-ezgif.com-video-to-gif-converter.gif',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitHeight,
                     ),
                   ),
                 )

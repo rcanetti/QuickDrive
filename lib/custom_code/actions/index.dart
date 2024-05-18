@@ -1,5 +1,4 @@
 export 'upload_file.dart' show uploadFile;
-export 'establish_connection.dart' show establishConnection;
 export 'sign_up.dart' show signUp;
 export 'log_in.dart' show logIn;
 export 'rename_file.dart' show renameFile;

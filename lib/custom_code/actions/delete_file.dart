@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-Future<List<String>> deleteFile(String? fileName) async {
+import 'package:quick_drive/custom_code/actions/format_msg.dart';
+
+Future<String> deleteFile(String? fileName) async {
   // Add your function code here!
-  return ["0", "1"];
+  return formatMsg('delete', fileName);
 }

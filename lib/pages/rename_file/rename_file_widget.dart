@@ -1,8 +1,10 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'rename_file_model.dart';
 export 'rename_file_model.dart';
 
@@ -49,8 +51,10 @@ class _RenameFileWidgetState extends State<RenameFileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Column(
-      mainAxisSize: MainAxisSize.max,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
           child: Container(
@@ -123,15 +127,27 @@ class _RenameFileWidgetState extends State<RenameFileWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      _model.newName = await actions.renameFile(
+                      _model.renameMsg = await actions.renameFile(
                         widget.oldFileName,
                         _model.textController.text,
                       );
+                      _model.renameResponse = await RenameCall.call(
+                        serverIP: FFAppState().ServerIP,
+                        username: FFAppState().username,
+                        key: FFAppState().key,
+                        body: _model.renameMsg,
+                      );
+                      _model.fileListMsg = await GetFilesCall.call(
+                        serverIP: FFAppState().ServerIP,
+                        username: FFAppState().username,
+                        key: FFAppState().key,
+                      );
+                      _model.fileList = await actions.getFiles(
+                        (_model.fileListMsg?.jsonBody ?? ''),
+                      );
                       FFAppState().update(() {
-                        FFAppState().updateFileNamesAtIndex(
-                          widget.fileIndex!,
-                          (_) => _model.newName!,
-                        );
+                        FFAppState().fileNames =
+                            _model.fileList!.toList().cast<String>();
                       });
                       context.safePop();
 
