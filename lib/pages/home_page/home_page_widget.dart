@@ -151,19 +151,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        _model.response =
-                                            await GetDownloadCall.call(
-                                          serverIP: FFAppState().ServerIP,
-                                          username: FFAppState().username,
-                                          key: FFAppState().key,
-                                          fileName: filesItem,
-                                        );
                                         await actions.downloadFile(
-                                          (_model.response?.jsonBody ?? ''),
                                           filesItem,
+                                          FFAppState().ServerIP,
+                                          FFAppState().username,
+                                          FFAppState().key,
                                         );
-
-                                        setState(() {});
                                       },
                                       child: Text(
                                         'Download',
