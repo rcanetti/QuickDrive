@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'dart:io';
+import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
 
 Future downloadFile(dynamic response, String fileName) async {
   // Add your function code here!
@@ -15,4 +17,7 @@ Future downloadFile(dynamic response, String fileName) async {
   final filePath = '${directory.path}/$fileName';
   File file = File(filePath);
   await file.writeAsBytes(response.bodyBytes);
+
+  // Open the file using the open_file package
+  await OpenFile.open(filePath);
 }
