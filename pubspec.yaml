@@ -28,6 +28,7 @@ dependencies:
   auto_size_text: 3.0.0
   cached_network_image: 3.3.1
   collection: 1.18.0
+  dio: ^5.0.3
   equatable: 2.0.5
   expandable: 5.0.1
   ffi: ^2.1.2
@@ -50,6 +51,7 @@ dependencies:
   path_provider_android: 2.0.25
   path_provider_foundation: 2.2.2
   path_provider_platform_interface: 2.0.6
+  permission_handler: ^10.2.0
   plugin_platform_interface: ^2.1.8
   provider: 6.0.5
   shared_preferences: 2.2.2

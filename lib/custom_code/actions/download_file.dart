@@ -10,17 +10,23 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:dio/dio.dart';
-import 'package:open_file/open_file.dart';
 
-Future downloadFile(
+Future<void> downloadFile(
   String fileName,
   String serverIP,
   String username,
   String key,
 ) async {
-  // Add your function code here!
+  // Request storage permission
+  var status = await Permission.storage.request();
+  if (!status.isGranted) {
+    print('Storage permission not granted');
+    return;
+  }
+
   // Construct the URL to download the file with query parameters
   Uri url = Uri.parse('http://$serverIP:8900/getDownload/$username');
   Map<String, String> queryParams = {
@@ -29,29 +35,21 @@ Future downloadFile(
   };
   url = url.replace(queryParameters: queryParams);
 
-  // Make an HTTP GET request to download the file
-  var response = await http.get(url);
+  // Create an instance of Dio
+  var dio = Dio();
 
-  // Check if the request was successful
-  if (response.statusCode == 200) {
-    // Get the bytes of the file content
-    List<int> fileBytes = response.bodyBytes;
+  // Get the directory to save the file
+  Directory? directory = await getApplicationDocumentsDirectory();
+  String filePath = '${directory.path}/$fileName';
 
-    // Get the directory to save the file
-    String downloadsDirectory = (await getDownloadsDirectory())!.path;
-
-    // Construct the file path
-    String filePath = '$downloadsDirectory/$fileName';
-
-    // Save the file to the device
-    File file = File(filePath);
-    await file.writeAsBytes(fileBytes);
-    await dio.download(downloadsDirectory, fileName);
-
-    OpenFile.open(filePath);
-
+  try {
+    // Download the file
+    await dio.download(url.toString(), filePath);
     print('File saved to: $filePath');
-  } else {
-    print('Failed to download file: ${response.statusCode}');
+
+    // Open the file
+    OpenFile.open(filePath);
+  } catch (e) {
+    print('Error downloading file: $e');
   }
 }
