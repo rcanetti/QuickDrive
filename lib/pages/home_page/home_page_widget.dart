@@ -62,6 +62,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               _model.uploadData![2],
               _model.uploadData![3],
               FFAppState().username,
+              FFAppState().key,
             );
             _model.newUploadJSON = await GetFilesCall.call(
               serverIP: FFAppState().ServerIP,

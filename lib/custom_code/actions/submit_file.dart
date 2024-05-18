@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 
 Future<void> submitFile(String filePath, String filename, String fileType,
-    String fileFormat, String username) async {
+    String fileFormat, String username, String key) async {
   ///MultiPart request
 
   // API endpoint URL
@@ -25,6 +25,7 @@ Future<void> submitFile(String filePath, String filename, String fileType,
       contentType: MediaType(fileType, fileFormat));
 
   request.files.add(file);
+  request.fields['key'] = key;
 
   // Send the request
   var res = await request.send();
