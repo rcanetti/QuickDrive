@@ -243,7 +243,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           serverIP: FFAppState().ServerIP,
                                           username: FFAppState().username,
                                           key: FFAppState().key,
-                                          body: _model.removeMsg,
+                                          body: filesItem,
                                         );
                                         _model.fileListMsg =
                                             await GetFilesCall.call(
@@ -265,7 +265,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         setState(() {});
                                       },
                                       child: Text(
-                                        'Delete',
+                                        'Remove',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
