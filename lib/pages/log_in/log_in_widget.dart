@@ -1542,8 +1542,7 @@ class _LogInWidgetState extends State<LogInWidget>
                                                           print(
                                                               'Button pressed ...');
                                                         },
-                                                        text:
-                                                            'Forgot Password?',
+                                                        text: '',
                                                         options:
                                                             FFButtonOptions(
                                                           height: 44.0,
