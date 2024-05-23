@@ -31,12 +31,5 @@ Future<String> signUp(
   String message = utf8.decode(serverData);
   tempSocket.close();
   print('Received data from server: $message');
-  // channel.sink.add(await formatMsg("register", username));
-  //   print("regisration sent");
   return message;
-  // if (message == 'true') {
-  //   return true;
-  // } else {
-  //   return false;
-  // }
 }

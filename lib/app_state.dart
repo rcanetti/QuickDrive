@@ -20,7 +20,7 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<String> _fileNames = ['pentagon file'];
+  List<String> _fileNames = [];
   List<String> get fileNames => _fileNames;
   set fileNames(List<String> value) {
     _fileNames = value;

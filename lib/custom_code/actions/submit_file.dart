@@ -14,8 +14,7 @@ Future<void> submitFile(String filePath, String filename, String fileType,
   ///MultiPart request
 
   // API endpoint URL
-  Uri url = Uri.parse(
-      'http://10.0.0.237:8900/Upload/$username'); // TODO canetti tashlim at ze
+  Uri url = Uri.parse('http://10.0.0.237:8900/Upload/$username');
 
   // Set up the request
   var request = http.MultipartRequest('POST', url);
