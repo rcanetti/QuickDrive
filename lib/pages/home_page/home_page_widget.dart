@@ -178,58 +178,51 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       builder: (context) {
                                         if ('zip' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.folder_zip,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFFDDC517),
                                             size: 24.0,
                                           );
                                         } else if ('pdf' ==
                                             functions.getType(filesItem)) {
-                                          return FaIcon(
+                                          return const FaIcon(
                                             FontAwesomeIcons.solidFilePdf,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFFFF0015),
                                             size: 24.0,
                                           );
                                         } else if ('png' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.photo,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFFD80871),
                                             size: 24.0,
                                           );
                                         } else if ('jpeg' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.photo,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFFD80871),
                                             size: 24.0,
                                           );
                                         } else if ('MP4' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.movie,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFF09BD11),
                                             size: 24.0,
                                           );
                                         } else if ('MP3' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.music_note,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFF800CEA),
                                             size: 24.0,
                                           );
                                         } else if ('jpg' ==
                                             functions.getType(filesItem)) {
-                                          return Icon(
+                                          return const Icon(
                                             Icons.photo,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                            color: Color(0xFFD80871),
                                             size: 24.0,
                                           );
                                         } else {
@@ -385,7 +378,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           Icon(
                                             Icons.delete_forever,
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
+                                                .error,
                                             size: 24.0,
                                           ),
                                           Align(
