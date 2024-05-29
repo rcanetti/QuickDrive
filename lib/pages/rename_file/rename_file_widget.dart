@@ -36,7 +36,7 @@ class _RenameFileWidgetState extends State<RenameFileWidget> {
     super.initState();
     _model = createModel(context, () => RenameFileModel());
 
-    _model.textController ??= TextEditingController();
+    _model.textController ??= TextEditingController(text: widget.oldFileName);
     _model.textFieldFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));

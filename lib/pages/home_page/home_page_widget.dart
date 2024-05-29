@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/remove_confirmation/remove_confirmation_widget.dart';
 import '/pages/rename_file/rename_file_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:expandable/expandable.dart';
@@ -144,144 +145,188 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               expanded: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await actions.downloadFile(
-                                          filesItem,
-                                          FFAppState().ServerIP,
-                                          FFAppState().username,
-                                          FFAppState().key,
-                                        );
-                                      },
-                                      child: Text(
-                                        'Download',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 17.0,
-                                              letterSpacing: 0.0,
-                                            ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
+                                        Icons.download,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
                                       ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          enableDrag: false,
-                                          useSafeArea: true,
-                                          context: context,
-                                          builder: (context) {
-                                            return GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
-                                              child: Padding(
-                                                padding:
-                                                    MediaQuery.viewInsetsOf(
-                                                        context),
-                                                child: RenameFileWidget(
-                                                  oldFileName: filesItem,
-                                                  fileIndex: filesIndex,
-                                                ),
-                                              ),
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(-1.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await actions.downloadFile(
+                                              filesItem,
+                                              FFAppState().ServerIP,
+                                              FFAppState().username,
+                                              FFAppState().key,
                                             );
                                           },
-                                        ).then((value) => safeSetState(() {}));
-                                      },
-                                      child: Text(
-                                        'Rename',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                          child: Text(
+                                            'Download',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .primaryText,
-                                              fontSize: 17.0,
-                                              letterSpacing: 0.0,
-                                            ),
+                                                  fontSize: 17.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Icon(
+                                        Icons.drive_file_rename_outline_sharp,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      Align(
+                                        alignment:
+                                            const AlignmentDirectional(-1.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              useSafeArea: true,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: RenameFileWidget(
+                                                      oldFileName: filesItem,
+                                                      fileIndex: filesIndex,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          child: Text(
+                                            'Rename',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Readex Pro',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                  fontSize: 17.0,
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   Divider(
                                     thickness: 2.0,
                                     endIndent: 275.0,
                                     color: FlutterFlowTheme.of(context).primary,
                                   ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        _model.removeMsg =
-                                            await actions.removeFile(
-                                          filesItem,
-                                        );
-                                        _model.removeResponse =
-                                            await RemoveCall.call(
-                                          serverIP: FFAppState().ServerIP,
-                                          username: FFAppState().username,
-                                          key: FFAppState().key,
-                                          body: _model.removeMsg?[1],
-                                          len: _model.removeMsg?[0],
-                                        );
-                                        _model.fileListMsg =
-                                            await GetFilesCall.call(
-                                          serverIP: FFAppState().ServerIP,
-                                          username: FFAppState().username,
-                                          key: FFAppState().key,
-                                        );
-                                        _model.fileList =
-                                            await actions.getFiles(
-                                          (_model.fileListMsg?.jsonBody ?? ''),
-                                        );
-                                        FFAppState().update(() {
-                                          FFAppState().fileNames = _model
-                                              .fileList!
-                                              .toList()
-                                              .cast<String>();
-                                        });
-
-                                        setState(() {});
-                                      },
-                                      child: Text(
-                                        'Remove',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 17.0,
-                                              letterSpacing: 0.0,
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 8.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Icon(
+                                          Icons.delete_forever,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24.0,
+                                        ),
+                                        Align(
+                                          alignment:
+                                              const AlignmentDirectional(-1.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                enableDrag: false,
+                                                useSafeArea: true,
+                                                context: context,
+                                                builder: (context) {
+                                                  return GestureDetector(
+                                                    onTap: () => _model
+                                                            .unfocusNode
+                                                            .canRequestFocus
+                                                        ? FocusScope.of(context)
+                                                            .requestFocus(_model
+                                                                .unfocusNode)
+                                                        : FocusScope.of(context)
+                                                            .unfocus(),
+                                                    child: Padding(
+                                                      padding: MediaQuery
+                                                          .viewInsetsOf(
+                                                              context),
+                                                      child:
+                                                          RemoveConfirmationWidget(
+                                                        fileName: filesItem,
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ).then((value) =>
+                                                  safeSetState(() {}));
+                                            },
+                                            child: Text(
+                                              'Remove',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                    fontSize: 17.0,
+                                                    letterSpacing: 0.0,
+                                                  ),
                                             ),
-                                      ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ].divide(const SizedBox(height: 5.0)),
