@@ -102,6 +102,7 @@ class _RemoveConfirmationWidgetState extends State<RemoveConfirmationWidget> {
                     FFAppState().fileNames =
                         _model.fileList!.toList().cast<String>();
                   });
+                  context.safePop();
 
                   setState(() {});
                 },
