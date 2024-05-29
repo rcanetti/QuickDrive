@@ -225,6 +225,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             color: Color(0xFFD80871),
                                             size: 24.0,
                                           );
+                                        } else if ('docx' ==
+                                            functions.getType(filesItem)) {
+                                          return const FaIcon(
+                                            FontAwesomeIcons.solidFileWord,
+                                            color: Color(0xFF0965E1),
+                                            size: 24.0,
+                                          );
                                         } else {
                                           return FaIcon(
                                             FontAwesomeIcons.solidFileAlt,
