@@ -6,8 +6,10 @@ import '/pages/profile/profile_widget.dart';
 import '/pages/remove_confirmation/remove_confirmation_widget.dart';
 import '/pages/rename_file/rename_file_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -169,17 +171,95 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             child: ExpandableNotifier(
                               initialExpanded: false,
                               child: ExpandablePanel(
-                                header: Text(
-                                  filesItem,
-                                  style: FlutterFlowTheme.of(context)
-                                      .displaySmall
-                                      .override(
-                                        fontFamily: 'Outfit',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 22.0,
-                                        letterSpacing: 0.0,
+                                header: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Builder(
+                                      builder: (context) {
+                                        if ('zip' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.folder_zip,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('pdf' ==
+                                            functions.getType(filesItem)) {
+                                          return FaIcon(
+                                            FontAwesomeIcons.solidFilePdf,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('png' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.photo,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('jpeg' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.photo,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('mp4' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.movie,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('mp3' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.music_note,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else if ('jpg' ==
+                                            functions.getType(filesItem)) {
+                                          return Icon(
+                                            Icons.photo,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        } else {
+                                          return FaIcon(
+                                            FontAwesomeIcons.solidFileAlt,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          );
+                                        }
+                                      },
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        filesItem,
+                                        style: FlutterFlowTheme.of(context)
+                                            .displaySmall
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              fontSize: 22.0,
+                                              letterSpacing: 0.0,
+                                            ),
                                       ),
+                                    ),
+                                  ],
                                 ),
                                 collapsed: Container(),
                                 expanded: Column(
