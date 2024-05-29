@@ -112,9 +112,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 borderWidth: 1.0,
                 buttonSize: 40.0,
                 fillColor: Colors.white,
-                icon: Icon(
+                icon: const Icon(
                   Icons.person,
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: Colors.black,
                   size: 24.0,
                 ),
                 onPressed: () async {

@@ -43,7 +43,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
-        width: 300.0,
+        width: 250.0,
+        height: 300.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           boxShadow: const [
