@@ -211,7 +211,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             color: Color(0xFF09BD11),
                                             size: 24.0,
                                           );
-                                        } else if ('MP3' ==
+                                        } else if ('mp3' ==
                                             functions.getType(filesItem)) {
                                           return const Icon(
                                             Icons.music_note,
