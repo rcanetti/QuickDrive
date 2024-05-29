@@ -208,7 +208,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 .secondaryText,
                                             size: 24.0,
                                           );
-                                        } else if ('mp4' ==
+                                        } else if ('MP4' ==
                                             functions.getType(filesItem)) {
                                           return Icon(
                                             Icons.movie,
@@ -216,7 +216,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 .secondaryText,
                                             size: 24.0,
                                           );
-                                        } else if ('mp3' ==
+                                        } else if ('MP3' ==
                                             functions.getType(filesItem)) {
                                           return Icon(
                                             Icons.music_note,
@@ -242,24 +242,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         }
                                       },
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        filesItem,
-                                        style: FlutterFlowTheme.of(context)
-                                            .displaySmall
-                                            .override(
-                                              fontFamily: 'Outfit',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 22.0,
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
+                                    Text(
+                                      filesItem,
+                                      style: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Outfit',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 22.0,
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
-                                  ],
+                                  ].divide(const SizedBox(width: 10.0)),
                                 ),
                                 collapsed: Container(),
                                 expanded: Column(

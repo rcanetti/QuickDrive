@@ -11,5 +11,6 @@ import 'uploaded_file.dart';
 
 String getType(String file) {
   List<String> parts = file.split('.');
-  return parts[1];
+  print(parts);
+  return parts.last;
 }
