@@ -1,6 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/pages/profile/profile_widget.dart';
 import '/pages/remove_confirmation/remove_confirmation_widget.dart';
 import '/pages/rename_file/rename_file_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
@@ -101,7 +103,44 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 15.0, 10.0),
+              child: FlutterFlowIconButton(
+                borderColor: FlutterFlowTheme.of(context).primary,
+                borderRadius: 20.0,
+                borderWidth: 1.0,
+                buttonSize: 40.0,
+                fillColor: Colors.white,
+                icon: Icon(
+                  Icons.person,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 24.0,
+                ),
+                onPressed: () async {
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    enableDrag: false,
+                    useSafeArea: true,
+                    context: context,
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () => _model.unfocusNode.canRequestFocus
+                            ? FocusScope.of(context)
+                                .requestFocus(_model.unfocusNode)
+                            : FocusScope.of(context).unfocus(),
+                        child: Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const ProfileWidget(),
+                        ),
+                      );
+                    },
+                  ).then((value) => safeSetState(() {}));
+                },
+              ),
+            ),
+          ],
           centerTitle: false,
           elevation: 2.0,
         ),
