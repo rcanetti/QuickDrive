@@ -176,7 +176,7 @@ def create_database():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS users (
-                    username TEXT,
+                    username TEXT PRIMARY KEY,
                     email TEXT,
                     phone_number TEXT,
                     password TEXT
@@ -291,16 +291,6 @@ class FastAPIServer:
 
             with open(file_path, "wb") as buffer:
                 shutil.copyfileobj(file.file, buffer)
-
-            # Initialize an empty list to store file names
-            # file_names = []
-            #
-            # Iterate over all files in the directory
-            # for filename in os.listdir(directory_path):
-            # Check if the entry is a file
-            # if os.path.isfile(os.path.join(directory_path, filename)):
-            # Add the file name to the list
-            # file_names.append(filename)
 
     @app.post("/Remove/{username}")
     def handle_rename(username: str, payload: PostMsg):

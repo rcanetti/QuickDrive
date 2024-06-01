@@ -88,7 +88,6 @@ class AdminSocket:
             # Close the cursor and connection
             c.close()
             conn.close()
-
             self.client_socket.send(self.AESC.encrypt(protocol.encode_msg("get", usernames)).encode('utf-8'))
             client_info = self.client_socket.recv(1024)
             request, username = protocol.decode_msg(self.AESC.decrypt(client_info.decode('utf-8')))
