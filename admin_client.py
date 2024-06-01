@@ -126,7 +126,8 @@ class Client:
             str: The server's response.
         """
         try:
-            self.admin_socket.send(self.AESC.encrypt(protocol.encode_msg("delete", filename)).encode())
+            print(filename)
+            self.admin_socket.send(self.AESC.encrypt(protocol.encode_msg("choose", filename)).encode())
             request, response = protocol.decode_msg(self.AESC.decrypt(self.admin_socket.recv(1024).decode('utf-8')))
             return response
         except Exception as e:
@@ -142,39 +143,39 @@ class Client:
 
 class Screen:
     """
-    A class to handle the graphical user interface for the admin client.
+   A class to handle the graphical user interface for the admin client.
 
-    Attributes:
-        screen (pygame.Surface): The display surface.
-        clock (pygame.time.Clock): The game clock for managing frame rate.
-        font (pygame.font.Font): The font used for rendering text.
-        client (Client): The client instance for communication with the server.
-        scroll_y (int): The current vertical scroll offset.
-        scroll_height (int): The total height of the scrollable area.
-        scroll_bar_rect (pygame.Rect): The rectangle representing the scroll bar.
-        scroll_dragging (bool): Flag indicating if the scroll bar is being dragged.
-        scroll_offset_y (int): The offset value for vertical scroll bar movement.
+   Attributes:
+       screen (pygame.Surface): The display surface.
+       clock (pygame.time.Clock): The game clock for managing frame rate.
+       font (pygame.font.Font): The font used for rendering text.
+       client (Client): The client instance for communication with the server.
+       scroll_y (int): The current vertical scroll offset.
+       scroll_height (int): The total height of the scrollable area.
+       scroll_bar_rect (pygame.Rect): The rectangle representing the scroll bar.
+       scroll_dragging (bool): Flag indicating if the scroll bar is being dragged.
+       scroll_offset_y (int): The offset value for vertical scroll bar movement.
 
-    Methods:
-        run_window(): Main loop for running the window.
-        show_menu(): Displays the main menu.
-        handle_menu_events(): Handles events in the main menu.
-        connect_to_server(): Connects to the server and initiates registration.
-        register_with_server(): Handles the registration process with the server.
-        user_selection_screen(): Displays the user selection screen.
-        file_deletion_screen(files): Displays the file deletion screen for a selected user.
-        get_user_input(): Captures text input from the user.
-        draw_text_fill(text, x, y, size, color, max_chars_per_line): Draws multi-line text on the screen.
-        draw_text(text, x, y, size, color): Draws single-line text on the screen.
-        draw_scroll_bar(): Draws the scroll bar on the screen.
-        handle_scroll_events(): Handles scrolling events.
-        cleanup(): Cleans up resources before exiting.
-    """
+   Methods:
+       run_window(): Main loop for running the window.
+       show_menu(): Displays the main menu.
+       handle_menu_events(): Handles events in the main menu.
+       connect_to_server(): Connects to the server and initiates registration.
+       register_with_server(): Handles the registration process with the server.
+       user_selection_screen(): Displays the user selection screen.
+       file_deletion_screen(files): Displays the file deletion screen for a selected user.
+       get_user_input(): Captures text input from the user.
+       draw_text_fill(text, x, y, size, color, max_chars_per_line): Draws multi-line text on the screen.
+       draw_text(text, x, y, size, color): Draws single-line text on the screen.
+       draw_scroll_bar(): Draws the scroll bar on the screen.
+       handle_scroll_events(): Handles scrolling events.
+       cleanup(): Cleans up resources before exiting.
+   """
 
     def __init__(self):
         """
-        Initializes the Screen, setting up the display, clock, font, and starting the game loop.
-        """
+       Initializes the Screen, setting up the display, clock, font, and starting the game loop.
+       """
         pygame.init()
         self.screen = pygame.display.set_mode((1024, 768))
         pygame.display.set_caption("Admin Client")
@@ -190,8 +191,8 @@ class Screen:
 
     def run_window(self):
         """
-            Main loop for running the window, updating the display, and handling events.
-        """
+           Main loop for running the window, updating the display, and handling events.
+       """
         while True:
             self.screen.fill((45, 45, 45))
             self.show_menu()
@@ -200,8 +201,8 @@ class Screen:
 
     def show_menu(self):
         """
-        Displays the main menu with options to connect to the server or quit.
-        """
+       Displays the main menu with options to connect to the server or quit.
+       """
         self.draw_text("Admin Client", 512, 100, size=72, color=(0, 204, 204))
         self.draw_text("1. Connect to Server", 512, 300)
         self.draw_text("2. Quit", 512, 400)
@@ -209,8 +210,8 @@ class Screen:
 
     def handle_menu_events(self):
         """
-        Handles user input events in the main menu.
-        """
+       Handles user input events in the main menu.
+       """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.cleanup()
@@ -226,8 +227,8 @@ class Screen:
 
     def connect_to_server(self):
         """
-        Connects to the server and initiates the registration process.
-        """
+       Connects to the server and initiates the registration process.
+       """
         self.screen.fill((45, 45, 45))
         self.draw_text("Connecting to Server...", 512, 300, color=(0, 204, 204))
         pygame.display.flip()
@@ -238,8 +239,8 @@ class Screen:
 
     def register_with_server(self):
         """
-        Handles the registration process with the server by capturing a secret code from the user.
-        """
+       Handles the registration process with the server by capturing a secret code from the user.
+       """
         while True:
             self.screen.fill((45, 45, 45))
             self.draw_text("Enter Secret Code:", 512, 100, color=(0, 204, 204))
@@ -257,8 +258,8 @@ class Screen:
 
     def user_selection_screen(self):
         """
-        Displays the user selection screen, allowing the admin to choose a user.
-        """
+       Displays the user selection screen, allowing the admin to choose a user.
+       """
         users = self.client.get_users()
         self.scroll_height = max(768, len(users) * 50 + 150)  # Adjust scroll area based on content
         while True:
@@ -269,6 +270,8 @@ class Screen:
             for user in users:
                 self.draw_text(user, 512, y_offset)
                 y_offset += 50
+            self.screen.fill((45, 45, 45), (0, 0, 1024, 100))
+            self.draw_text("Select a User", 512, 50, color=(0, 204, 204))
             self.draw_text("Enter 'back' to return to user selection", 512, 700, color=(255, 255, 0))
             self.scroll_height = max(768, len(users) * 50 + 150)  # Adjust scroll area based on content
             username = self.handle_events()
@@ -280,10 +283,10 @@ class Screen:
 
     def file_deletion_screen(self, files):
         """
-        Displays the file deletion screen, allowing the admin to delete a selected file for the user.
-        Args:
-            files (list): The list of files for the selected user.
-        """
+       Displays the file deletion screen, allowing the admin to delete a selected file for the user.
+       Args:
+           files (list): The list of files for the selected user.
+       """
         self.scroll_height = max(768, len(files) * 50 + 150)  # Adjust scroll area based on content
         while True:
             self.screen.fill((45, 45, 45))
@@ -303,14 +306,14 @@ class Screen:
             if filename == "back":
                 return
             if filename:
-                self.client.delete_file(filename)
+                files = self.client.delete_file(filename)
 
     def handle_events(self):
         """
-        Captures text input from the user.
-        Returns:
-            str: The text input entered by the user.
-        """
+       Captures text input from the user.
+       Returns:
+           str: The text input entered by the user.
+       """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.cleanup()
@@ -332,15 +335,15 @@ class Screen:
     def draw_text_fill(self, text: str, x: int, y: int, size: int = 28, color: tuple = (255, 255, 255),
                        max_chars_per_line: int = 15):
         """
-        Draws multi-line text on the screen.
-        Args:
-            text (str): The text to be drawn.
-            x (int): The x-coordinate for the text position.
-            y (int): The y-coordinate for the text position.
-            size (int): The font size.
-            color (tuple): The color of the text.
-            max_chars_per_line (int): Maximum number of characters per line.
-        """
+       Draws multi-line text on the screen.
+       Args:
+           text (str): The text to be drawn.
+           x (int): The x-coordinate for the text position.
+           y (int): The y-coordinate for the text position.
+           size (int): The font size.
+           color (tuple): The color of the text.
+           max_chars_per_line (int): Maximum number of characters per line.
+       """
         font = pygame.font.Font(pygame.font.match_font('segoeui'), size)
         lines = []
         while len(text) > max_chars_per_line:
@@ -362,49 +365,35 @@ class Screen:
 
     def draw_text(self, text: str, x: int, y: int, size: int = 28, color: tuple = (255, 255, 255)):
         """
-        Draws single-line text on the screen.
-        Args:
-            text (str): The text to be drawn.
-            x (int): The x-coordinate for the text position.
-            y (int): The y-coordinate for the text position.
-            size (int): The font size.
-            color (tuple): The color of the text.
-        """
+       Draws single-line text on the screen.
+       Args:
+           text (str): The text to be drawn.
+           x (int): The x-coordinate for the text position.
+           y (int): The y-coordinate for the text position.
+           size (int): The font size.
+           color (tuple): The color of the text.
+       """
         font = pygame.font.Font(pygame.font.match_font('segoeui'), size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect(center=(x, y))
         self.screen.blit(text_surface, text_rect)
 
-    def draw_scroll_bar(self):
-        """
-        Draws the scroll bar on the screen.
-        """
-        # Calculate the height and position of the scroll bar based on content and scroll position
-        scroll_bar_height = 768 * (768 // self.scroll_height)
-        scroll_bar_y = (self.scroll_y // self.scroll_height) * 768
-        # Ensure the scroll bar remains within the screen bounds
-        scroll_bar_y = max(0, min(scroll_bar_y, 768 - scroll_bar_height))
-        # Update the scroll bar rectangle
-        self.scroll_bar_rect = pygame.Rect(1000, scroll_bar_y, 24, scroll_bar_height)
-        # Draw the scroll bar
-        pygame.draw.rect(self.screen, (200, 200, 200), self.scroll_bar_rect)
-
     def handle_scroll_events(self):
         """
-        Handles scrolling events for navigating through lists using arrow keys.
-        """
+       Handles scrolling events for navigating through lists using arrow keys.
+       """
         keys = pygame.key.get_pressed()
-        scroll_speed = 10  # Adjust the scroll speed as needed
+        scroll_speed = 5  # Adjust the scroll speed as needed
 
-        if keys[pygame.K_UP]:
-            self.scroll_y = max(0, self.scroll_y - scroll_speed)
-        elif keys[pygame.K_DOWN]:
-            self.scroll_y = min(self.scroll_height - 768, self.scroll_y + scroll_speed)
+        if keys[pygame.K_UP] and self.scroll_y > 0:
+            self.scroll_y =  self.scroll_y - scroll_speed
+        elif keys[pygame.K_DOWN] and self.scroll_y < self.scroll_height - 768:
+            self.scroll_y = self.scroll_y + scroll_speed
 
     def cleanup(self):
         """
-        Cleans up resources before exiting.
-        """
+       Cleans up resources before exiting.
+       """
         if self.client:
             self.client.close()
 
