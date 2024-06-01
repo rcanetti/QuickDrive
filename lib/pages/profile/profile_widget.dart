@@ -216,6 +216,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
+                                FFAppState().persistedUsername = '';
+                                FFAppState().persistedPassword = '';
+                                setState(() {});
+
                                 context.goNamed('LogIn');
                               },
                               child: Text(

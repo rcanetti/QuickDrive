@@ -79,10 +79,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               (_model.newUploadJSON?.jsonBody ?? ''),
             );
             shouldSetState = true;
-            setState(() {
-              FFAppState().fileNames =
-                  _model.newUploadedFiles!.toList().cast<String>();
-            });
+            FFAppState().fileNames =
+                _model.newUploadedFiles!.toList().cast<String>();
+            setState(() {});
             if (shouldSetState) setState(() {});
           },
           backgroundColor: FlutterFlowTheme.of(context).primary,

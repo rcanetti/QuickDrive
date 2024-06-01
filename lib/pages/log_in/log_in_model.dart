@@ -19,6 +19,12 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - logIn] action in LogIn widget.
+  String? key;
+  // Stores action output result for [Backend Call - API (getFiles)] action in LogIn widget.
+  ApiCallResponse? fileNames;
+  // Stores action output result for [Custom Action - getFiles] action in LogIn widget.
+  List<String>? newFiles;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
@@ -57,6 +63,8 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   ApiCallResponse? fileNamesSignUp;
   // Stores action output result for [Custom Action - getFiles] action in Button widget.
   List<String>? newFilesSignUp;
+  // State field(s) for signCheckBox widget.
+  bool? signCheckBoxValue;
   // State field(s) for usernameAddress widget.
   FocusNode? usernameAddressFocusNode;
   TextEditingController? usernameAddressTextController;
@@ -73,6 +81,8 @@ class LogInModel extends FlutterFlowModel<LogInWidget> {
   ApiCallResponse? fileNamesLogIn;
   // Stores action output result for [Custom Action - getFiles] action in Button widget.
   List<String>? newFilesLogIn;
+  // State field(s) for logCheckBox widget.
+  bool? logCheckBoxValue;
 
   @override
   void initState(BuildContext context) {

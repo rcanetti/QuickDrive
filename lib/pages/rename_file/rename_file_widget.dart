@@ -152,10 +152,9 @@ class _RenameFileWidgetState extends State<RenameFileWidget> {
                         _model.fileList = await actions.getFiles(
                           (_model.fileListMsg?.jsonBody ?? ''),
                         );
-                        FFAppState().update(() {
-                          FFAppState().fileNames =
-                              _model.fileList!.toList().cast<String>();
-                        });
+                        FFAppState().fileNames =
+                            _model.fileList!.toList().cast<String>();
+                        FFAppState().update(() {});
                         context.safePop();
 
                         setState(() {});

@@ -7,33 +7,6 @@ export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class GetDownloadCall {
-  static Future<ApiCallResponse> call({
-    String? serverIP = '',
-    String? username = '',
-    String? key = '',
-    String? fileName = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'getDownload',
-      apiUrl: 'http://$serverIP:8900/getDownload/$username',
-      callType: ApiCallType.GET,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {
-        'key': key,
-        'data': fileName,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class GetFilesCall {
   static Future<ApiCallResponse> call({
     String? serverIP = '',
@@ -50,34 +23,6 @@ class GetFilesCall {
       params: {
         'key': key,
       },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class UploadCall {
-  static Future<ApiCallResponse> call({
-    String? serverIP = '',
-    String? body = '',
-    String? username = '',
-    String? key = '',
-  }) async {
-    final ffApiRequestBody = '''
-{"data": "$body", "key": "$key"}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Upload',
-      apiUrl: 'http://$serverIP:8900/Upload/$username',
-      callType: ApiCallType.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -104,39 +49,6 @@ class RemoveCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Remove',
       apiUrl: 'http://$serverIP:8900/Remove/$username',
-      callType: ApiCallType.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {},
-      body: ffApiRequestBody,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
-class DownloadCall {
-  static Future<ApiCallResponse> call({
-    String? serverIP = '',
-    String? body = '',
-    String? username = '',
-    String? key = '',
-    String? len = '',
-  }) async {
-    final ffApiRequestBody = '''
-{
-  "data": "$body",
-  "len": "$len",
-  "key": "$key"
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Download',
-      apiUrl: 'http://$serverIP:8900/Download/$username',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -202,10 +114,14 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
     if (kDebugMode) {
       print("List serialization failed. Returning empty list.");
@@ -217,7 +133,7 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
     if (kDebugMode) {
       print("Json serialization failed. Returning empty json.");

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'log_in_model.dart';
@@ -29,6 +30,33 @@ class _LogInWidgetState extends State<LogInWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => LogInModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().persistedUsername != '') {
+        _model.key = await actions.logIn(
+          FFAppState().persistedUsername,
+          FFAppState().persistedPassword,
+        );
+        FFAppState().username = FFAppState().persistedUsername;
+        FFAppState().key = _model.key!;
+        FFAppState().update(() {});
+        _model.fileNames = await GetFilesCall.call(
+          serverIP: FFAppState().ServerIP,
+          username: FFAppState().username,
+          key: FFAppState().key,
+        );
+        _model.newFiles = await actions.getFiles(
+          (_model.fileNames?.jsonBody ?? ''),
+        );
+        FFAppState().fileNames = _model.newFiles!.toList().cast<String>();
+        FFAppState().update(() {});
+
+        context.pushNamed('HomePage');
+      } else {
+        return;
+      }
+    });
 
     _model.tabBarController = TabController(
       vsync: this,
@@ -155,7 +183,7 @@ class _LogInWidgetState extends State<LogInWidget>
                 padding: const EdgeInsetsDirectional.fromSTEB(32.0, 12.0, 32.0, 32.0),
                 child: Container(
                   width: double.infinity,
-                  height: 208.0,
+                  height: 141.0,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
                     borderRadius: BorderRadius.circular(16.0),
@@ -177,7 +205,7 @@ class _LogInWidgetState extends State<LogInWidget>
               Align(
                 alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 150.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 130.0, 0.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -949,25 +977,24 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          setState(() {
-                                                            _model.username = _model
-                                                                .usernameAddressCreateTextController
-                                                                .text;
-                                                            _model.password = _model
-                                                                .passwordCreateTextController1
-                                                                .text;
-                                                            _model.confirmPassword =
-                                                                _model
-                                                                    .passwordCreateTextController2
-                                                                    .text;
-                                                            _model.email = _model
-                                                                .emailAddressCreateTextController
-                                                                .text;
-                                                            _model.phoneNumber =
-                                                                _model
-                                                                    .phoneNumberAddressCreateTextController
-                                                                    .text;
-                                                          });
+                                                          _model.username = _model
+                                                              .usernameAddressCreateTextController
+                                                              .text;
+                                                          _model.password = _model
+                                                              .passwordCreateTextController1
+                                                              .text;
+                                                          _model.confirmPassword =
+                                                              _model
+                                                                  .passwordCreateTextController2
+                                                                  .text;
+                                                          _model.email = _model
+                                                              .emailAddressCreateTextController
+                                                              .text;
+                                                          _model.phoneNumber =
+                                                              _model
+                                                                  .phoneNumberAddressCreateTextController
+                                                                  .text;
+                                                          setState(() {});
                                                           if (_model.password ==
                                                               _model
                                                                   .confirmPassword) {
@@ -983,16 +1010,15 @@ class _LogInWidgetState extends State<LogInWidget>
                                                             if (_model.canLog !=
                                                                 'false') {
                                                               FFAppState()
-                                                                  .update(() {
-                                                                FFAppState()
-                                                                        .username =
-                                                                    _model
-                                                                        .username!;
-                                                                FFAppState()
-                                                                        .key =
-                                                                    _model
-                                                                        .canLog!;
-                                                              });
+                                                                      .username =
+                                                                  _model
+                                                                      .username!;
+                                                              FFAppState().key =
+                                                                  _model
+                                                                      .canLog!;
+                                                              FFAppState()
+                                                                  .update(
+                                                                      () {});
                                                               _model.fileNamesSignUp =
                                                                   await GetFilesCall
                                                                       .call(
@@ -1014,18 +1040,34 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                     ''),
                                                               );
                                                               FFAppState()
-                                                                  .update(() {
-                                                                FFAppState()
-                                                                        .fileNames =
-                                                                    _model
-                                                                        .newFilesSignUp!
-                                                                        .toList()
-                                                                        .cast<
-                                                                            String>();
-                                                              });
+                                                                      .fileNames =
+                                                                  _model
+                                                                      .newFilesSignUp!
+                                                                      .toList()
+                                                                      .cast<
+                                                                          String>();
+                                                              FFAppState()
+                                                                  .update(
+                                                                      () {});
 
                                                               context.pushNamed(
                                                                   'HomePage');
+
+                                                              if (_model
+                                                                      .signCheckBoxValue ==
+                                                                  true) {
+                                                                FFAppState()
+                                                                        .persistedUsername =
+                                                                    _model
+                                                                        .usernameAddressCreateTextController
+                                                                        .text;
+                                                                FFAppState()
+                                                                        .persistedPassword =
+                                                                    _model
+                                                                        .passwordCreateTextController1
+                                                                        .text;
+                                                                setState(() {});
+                                                              }
                                                             }
                                                           }
 
@@ -1079,6 +1121,77 @@ class _LogInWidgetState extends State<LogInWidget>
                                                         ),
                                                       ),
                                                     ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Theme(
+                                                        data: ThemeData(
+                                                          checkboxTheme:
+                                                              CheckboxThemeData(
+                                                            visualDensity:
+                                                                VisualDensity
+                                                                    .compact,
+                                                            materialTapTargetSize:
+                                                                MaterialTapTargetSize
+                                                                    .shrinkWrap,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4.0),
+                                                            ),
+                                                          ),
+                                                          unselectedWidgetColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryText,
+                                                        ),
+                                                        child: Checkbox(
+                                                          value: _model
+                                                                  .signCheckBoxValue ??=
+                                                              false,
+                                                          onChanged:
+                                                              (newValue) async {
+                                                            setState(() => _model
+                                                                    .signCheckBoxValue =
+                                                                newValue!);
+                                                          },
+                                                          side: BorderSide(
+                                                            width: 2,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                          ),
+                                                          activeColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          checkColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .info,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        'Remember Me',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
@@ -1414,32 +1527,33 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          setState(() {
-                                                            _model.username = _model
-                                                                .usernameAddressTextController
-                                                                .text;
-                                                            _model.password = _model
-                                                                .passwordTextController
-                                                                .text;
-                                                          });
+                                                          var shouldSetState =
+                                                              false;
+                                                          _model.username = _model
+                                                              .usernameAddressTextController
+                                                              .text;
+                                                          _model.password = _model
+                                                              .passwordTextController
+                                                              .text;
+                                                          setState(() {});
                                                           _model.canLog2 =
                                                               await actions
                                                                   .logIn(
                                                             _model.username,
                                                             _model.password,
                                                           );
+                                                          shouldSetState =
+                                                              true;
                                                           if (_model.canLog2 !=
                                                               'false') {
                                                             FFAppState()
-                                                                .update(() {
-                                                              FFAppState()
-                                                                      .username =
-                                                                  _model
-                                                                      .username!;
-                                                              FFAppState().key =
-                                                                  _model
-                                                                      .canLog2!;
-                                                            });
+                                                                    .username =
+                                                                _model
+                                                                    .username!;
+                                                            FFAppState().key =
+                                                                _model.canLog2!;
+                                                            FFAppState()
+                                                                .update(() {});
                                                             _model.fileNamesLogIn =
                                                                 await GetFilesCall
                                                                     .call(
@@ -1452,6 +1566,8 @@ class _LogInWidgetState extends State<LogInWidget>
                                                               key: FFAppState()
                                                                   .key,
                                                             );
+                                                            shouldSetState =
+                                                                true;
                                                             _model.newFilesLogIn =
                                                                 await actions
                                                                     .getFiles(
@@ -1459,22 +1575,46 @@ class _LogInWidgetState extends State<LogInWidget>
                                                                       ?.jsonBody ??
                                                                   ''),
                                                             );
+                                                            shouldSetState =
+                                                                true;
                                                             FFAppState()
-                                                                .update(() {
-                                                              FFAppState()
-                                                                      .fileNames =
-                                                                  _model
-                                                                      .newFilesLogIn!
-                                                                      .toList()
-                                                                      .cast<
-                                                                          String>();
-                                                            });
+                                                                    .fileNames =
+                                                                _model
+                                                                    .newFilesLogIn!
+                                                                    .toList()
+                                                                    .cast<
+                                                                        String>();
+                                                            FFAppState()
+                                                                .update(() {});
 
                                                             context.pushNamed(
                                                                 'HomePage');
+
+                                                            if (_model
+                                                                    .logCheckBoxValue ==
+                                                                true) {
+                                                              FFAppState()
+                                                                      .persistedUsername =
+                                                                  _model
+                                                                      .usernameAddressTextController
+                                                                      .text;
+                                                              FFAppState()
+                                                                      .persistedPassword =
+                                                                  _model
+                                                                      .passwordTextController
+                                                                      .text;
+                                                              setState(() {});
+                                                            }
+                                                          } else {
+                                                            if (shouldSetState) {
+                                                              setState(() {});
+                                                            }
+                                                            return;
                                                           }
 
-                                                          setState(() {});
+                                                          if (shouldSetState) {
+                                                            setState(() {});
+                                                          }
                                                         },
                                                         text: 'Sign In',
                                                         options:
@@ -1525,76 +1665,76 @@ class _LogInWidgetState extends State<LogInWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                  Align(
-                                                    alignment:
-                                                        const AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  16.0),
-                                                      child: FFButtonWidget(
-                                                        onPressed: () {
-                                                          print(
-                                                              'Button pressed ...');
-                                                        },
-                                                        text: '',
-                                                        options:
-                                                            FFButtonOptions(
-                                                          height: 44.0,
-                                                          padding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      32.0,
-                                                                      0.0,
-                                                                      32.0,
-                                                                      0.0),
-                                                          iconPadding:
-                                                              const EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0,
-                                                                      0.0),
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          textStyle:
+                                                  Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Theme(
+                                                        data: ThemeData(
+                                                          checkboxTheme:
+                                                              CheckboxThemeData(
+                                                            visualDensity:
+                                                                VisualDensity
+                                                                    .compact,
+                                                            materialTapTargetSize:
+                                                                MaterialTapTargetSize
+                                                                    .shrinkWrap,
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4.0),
+                                                            ),
+                                                          ),
+                                                          unselectedWidgetColor:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Readex Pro',
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                          elevation: 0.0,
-                                                          borderSide:
-                                                              BorderSide(
+                                                                  .secondaryText,
+                                                        ),
+                                                        child: Checkbox(
+                                                          value: _model
+                                                                  .logCheckBoxValue ??=
+                                                              false,
+                                                          onChanged:
+                                                              (newValue) async {
+                                                            setState(() => _model
+                                                                    .logCheckBoxValue =
+                                                                newValue!);
+                                                          },
+                                                          side: BorderSide(
+                                                            width: 2,
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .secondaryBackground,
-                                                            width: 2.0,
+                                                                .secondaryText,
                                                           ),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      40.0),
-                                                          hoverColor:
+                                                          activeColor:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .primaryBackground,
+                                                                  .primary,
+                                                          checkColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .info,
                                                         ),
                                                       ),
-                                                    ),
+                                                      Text(
+                                                        'Remember Me',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
