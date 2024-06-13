@@ -40,26 +40,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToFileNames(String value) {
-    _fileNames.add(value);
+    fileNames.add(value);
   }
 
   void removeFromFileNames(String value) {
-    _fileNames.remove(value);
+    fileNames.remove(value);
   }
 
   void removeAtIndexFromFileNames(int index) {
-    _fileNames.removeAt(index);
+    fileNames.removeAt(index);
   }
 
   void updateFileNamesAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _fileNames[index] = updateFn(_fileNames[index]);
+    fileNames[index] = updateFn(_fileNames[index]);
   }
 
   void insertAtIndexInFileNames(int index, String value) {
-    _fileNames.insert(index, value);
+    fileNames.insert(index, value);
   }
 
   String _ServerIP = '10.0.0.237';
